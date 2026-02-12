@@ -114,7 +114,7 @@ const char *ir_submenu_items[ir_NUM_SUBMENU_ITEMS] = {
 const int about_NUM_SUBMENU_ITEMS = 1; 
 const char *about_submenu_items[about_NUM_SUBMENU_ITEMS] = {
     "Back to Main Menu"};
-    
+
 int current_submenu_index = 0;
 bool in_sub_menu = false;
 
@@ -278,7 +278,7 @@ void displaySubmenu() {
             if (i == active_submenu_size - 1) yPos += 10;
 
             tft.setTextColor((i == active_submenu_size - 1) ? SHREDDY_TEAL : SHREDDY_TEAL, TFT_BLACK);         
-            tft.drawBitmap(10, yPos, active_submenu_icons[i], 16, 16, (i == active_submenu_size - 1) ? SHREDDY_TEAL : SHREDDY_TEAL);            
+            drawSubmenuGlyph(10, yPos, false, (i == active_submenu_size - 1));
             tft.setCursor(30, yPos); 
             if (i < active_submenu_size - 1) { 
                 tft.print("| "); 
@@ -296,7 +296,7 @@ void displaySubmenu() {
             if (last_submenu_index == active_submenu_size - 1) prev_yPos += 10;
 
             tft.setTextColor((last_submenu_index == active_submenu_size - 1) ? SHREDDY_TEAL : SHREDDY_TEAL, TFT_BLACK);           
-            tft.drawBitmap(10, prev_yPos, active_submenu_icons[last_submenu_index], 16, 16, (last_submenu_index == active_submenu_size - 1) ? SHREDDY_TEAL : SHREDDY_TEAL);
+            drawSubmenuGlyph(10, prev_yPos, false, (last_submenu_index == active_submenu_size - 1));
             tft.setCursor(30, prev_yPos);
             if (last_submenu_index < active_submenu_size - 1) { 
                 tft.print("| "); 
@@ -308,7 +308,7 @@ void displaySubmenu() {
         if (current_submenu_index == active_submenu_size - 1) new_yPos += 10;
 
         tft.setTextColor((current_submenu_index == active_submenu_size - 1) ? ORANGE : ORANGE, TFT_BLACK);
-        tft.drawBitmap(10, new_yPos, active_submenu_icons[current_submenu_index], 16, 16, (current_submenu_index == active_submenu_size - 1) ? ORANGE : ORANGE);       
+        drawSubmenuGlyph(10, new_yPos, true, (current_submenu_index == active_submenu_size - 1));
         tft.setCursor(30, new_yPos);
         if (current_submenu_index < active_submenu_size - 1) { 
             tft.print("| "); 
@@ -326,6 +326,67 @@ const int X_OFFSET_LEFT = 10;
 const int X_OFFSET_RIGHT = X_OFFSET_LEFT + COLUMN_WIDTH;  
 const int Y_START = 30;        
 const int Y_SPACING = 75;   
+
+void drawMenuGlyph(int x, int y, int index, uint16_t color) {
+    // 16x16 simple vector-like glyphs so menu buttons have visible icons
+    switch (index) {
+        case 0: // WiFi
+            tft.drawCircle(x + 8, y + 8, 1, color);
+            tft.drawCircle(x + 8, y + 8, 4, color);
+            tft.drawCircle(x + 8, y + 8, 7, color);
+            break;
+        case 1: // Bluetooth
+            tft.drawLine(x + 8, y + 1, x + 8, y + 15, color);
+            tft.drawLine(x + 8, y + 8, x + 13, y + 4, color);
+            tft.drawLine(x + 8, y + 8, x + 13, y + 12, color);
+            tft.drawLine(x + 8, y + 1, x + 13, y + 4, color);
+            tft.drawLine(x + 8, y + 15, x + 13, y + 12, color);
+            break;
+        case 2: // 2.4GHz
+            tft.drawRect(x + 1, y + 3, 14, 10, color);
+            tft.drawFastVLine(x + 15, y + 6, 4, color);
+            break;
+        case 3: // SubGHz
+            tft.drawFastVLine(x + 8, y + 2, 10, color);
+            tft.drawLine(x + 8, y + 2, x + 3, y + 7, color);
+            tft.drawLine(x + 8, y + 2, x + 13, y + 7, color);
+            tft.drawFastHLine(x + 4, y + 13, 8, color);
+            break;
+        case 4: // IR
+            tft.fillCircle(x + 8, y + 8, 2, color);
+            tft.drawCircle(x + 8, y + 8, 5, color);
+            tft.drawCircle(x + 8, y + 8, 8, color);
+            break;
+        case 5: // Tools
+            tft.drawRect(x + 2, y + 3, 12, 10, color);
+            tft.drawFastHLine(x + 4, y + 6, 8, color);
+            tft.drawFastHLine(x + 4, y + 9, 8, color);
+            break;
+        case 6: // Settings
+            tft.drawCircle(x + 8, y + 8, 4, color);
+            tft.drawFastVLine(x + 8, y + 1, 3, color);
+            tft.drawFastVLine(x + 8, y + 12, 3, color);
+            tft.drawFastHLine(x + 1, y + 8, 3, color);
+            tft.drawFastHLine(x + 12, y + 8, 3, color);
+            break;
+        default: // About
+            tft.drawCircle(x + 8, y + 5, 3, color);
+            tft.drawFastVLine(x + 8, y + 9, 5, color);
+            break;
+    }
+}
+
+void drawSubmenuGlyph(int x, int y, bool selected, bool isBack) {
+    uint16_t c = selected ? ORANGE : SHREDDY_TEAL;
+    if (isBack) {
+        tft.drawFastHLine(x + 3, y + 8, 10, c);
+        tft.drawLine(x + 3, y + 8, x + 7, y + 4, c);
+        tft.drawLine(x + 3, y + 8, x + 7, y + 12, c);
+    } else {
+        tft.drawRoundRect(x + 2, y + 2, 12, 12, 2, c);
+        tft.fillRect(x + 5, y + 5, 6, 6, c);
+    }
+}
 
 void displayMenu() {
 
@@ -363,7 +424,7 @@ const uint16_t icon_colors[NUM_MENU_ITEMS] = {
 
             // Clear/transparent button - just border, no fill
             tft.drawRoundRect(x_position, y_position, 100, 60, 5, HALEHOUND_CYAN);
-            tft.drawBitmap(x_position + 42, y_position + 10, bitmap_icons[i], 16, 16, HALEHOUND_CYAN);
+            drawMenuGlyph(x_position + 42, y_position + 10, i, HALEHOUND_CYAN);
 
             tft.setTextColor(HALEHOUND_CYAN);  // Transparent background
             int textWidth = 6 * strlen(menu_items[i]);
@@ -386,7 +447,7 @@ const uint16_t icon_colors[NUM_MENU_ITEMS] = {
             if (i == last_menu_index) {
                 // Deselected - redraw border in cyan (erase magenta border)
                 tft.drawRoundRect(x_position, y_position, 100, 60, 5, HALEHOUND_CYAN);
-                tft.drawBitmap(x_position + 42, y_position + 10, bitmap_icons[last_menu_index], 16, 16, HALEHOUND_CYAN);
+                drawMenuGlyph(x_position + 42, y_position + 10, last_menu_index, HALEHOUND_CYAN);
                 tft.setTextColor(HALEHOUND_CYAN);
                 int textWidth = 6 * strlen(menu_items[last_menu_index]);
                 int textX = x_position + (100 - textWidth) / 2;
@@ -403,7 +464,7 @@ const uint16_t icon_colors[NUM_MENU_ITEMS] = {
 
         // Selected button - magenta border and text
         tft.drawRoundRect(x_position, y_position, 100, 60, 5, HALEHOUND_MAGENTA);
-        tft.drawBitmap(x_position + 42, y_position + 10, bitmap_icons[current_menu_index], 16, 16, HALEHOUND_MAGENTA);
+        drawMenuGlyph(x_position + 42, y_position + 10, current_menu_index, HALEHOUND_MAGENTA);
         tft.setTextColor(HALEHOUND_MAGENTA);
         int textWidth = 6 * strlen(menu_items[current_menu_index]);
         int textX = x_position + (100 - textWidth) / 2;
