@@ -2779,7 +2779,7 @@ void handleAboutPage() {
   tft.setTextSize(1);
   tft.setTextFont(2);
   
-  const char* title = "A multi-band platform for monitoring and analyzing radio spectrum based on the ESP32 microcontroller.";
+  const char* title = "Multi-band platform for monitoring radio spectrum based on the ESP32";
   tft.setCursor(10, 90);
   tft.println(title);
   
@@ -2791,6 +2791,9 @@ void handleAboutPage() {
   text_y += lineHeight;
   tft.setCursor(text_x, text_y);
   tft.println("- By: Andrei Y.");
+  text_y += lineHeight;
+  tft.setCursor(text_x, text_y);
+  tft.println("- 2026");
   text_y += lineHeight;
 
 
