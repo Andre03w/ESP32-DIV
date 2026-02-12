@@ -114,7 +114,7 @@ const char *ir_submenu_items[ir_NUM_SUBMENU_ITEMS] = {
 const int about_NUM_SUBMENU_ITEMS = 1; 
 const char *about_submenu_items[about_NUM_SUBMENU_ITEMS] = {
     "Back to Main Menu"};
-    
+
 int current_submenu_index = 0;
 bool in_sub_menu = false;
 
@@ -278,7 +278,7 @@ void displaySubmenu() {
             if (i == active_submenu_size - 1) yPos += 10;
 
             tft.setTextColor((i == active_submenu_size - 1) ? SHREDDY_TEAL : SHREDDY_TEAL, TFT_BLACK);         
-            tft.drawBitmap(10, yPos, active_submenu_icons[i], 16, 16, (i == active_submenu_size - 1) ? SHREDDY_TEAL : SHREDDY_TEAL);            
+            tft.drawBitmap(10, yPos, active_submenu_icons[i], 16, 16, (i == active_submenu_size - 1) ? SHREDDY_TEAL : SHREDDY_TEAL);
             tft.setCursor(30, yPos); 
             if (i < active_submenu_size - 1) { 
                 tft.print("| "); 
@@ -308,7 +308,7 @@ void displaySubmenu() {
         if (current_submenu_index == active_submenu_size - 1) new_yPos += 10;
 
         tft.setTextColor((current_submenu_index == active_submenu_size - 1) ? ORANGE : ORANGE, TFT_BLACK);
-        tft.drawBitmap(10, new_yPos, active_submenu_icons[current_submenu_index], 16, 16, (current_submenu_index == active_submenu_size - 1) ? ORANGE : ORANGE);       
+        tft.drawBitmap(10, new_yPos, active_submenu_icons[current_submenu_index], 16, 16, (current_submenu_index == active_submenu_size - 1) ? ORANGE : ORANGE);
         tft.setCursor(30, new_yPos);
         if (current_submenu_index < active_submenu_size - 1) { 
             tft.print("| "); 
@@ -326,6 +326,7 @@ const int X_OFFSET_LEFT = 10;
 const int X_OFFSET_RIGHT = X_OFFSET_LEFT + COLUMN_WIDTH;  
 const int Y_START = 30;        
 const int Y_SPACING = 75;   
+
 
 void displayMenu() {
 

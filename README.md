@@ -42,11 +42,11 @@
 
 # ESP32-DIV v2.5.0 — HaleHound Edition
 
-![ESP32](https://img.shields.io/badge/ESP32--WROOM--32U-blue?logo=espressif)
+![ESP32](https://img.shields.io/badge/ESP32--WROOM--32U-blue?logo=simpleicons)
 ![Version](https://img.shields.io/badge/Version-2.5.0-green)
 ![License](https://img.shields.io/badge/License-Educational-orange)
 ![Status](https://img.shields.io/badge/Status-Ready%20to%20Flash-brightgreen)
-[![Discord](https://img.shields.io/badge/Discord-Join%20Server-5865F2?logo=discord&logoColor=white)](https://discord.gg/HPyVqAy7)
+[![Discord](https://img.shields.io/badge/Discord-Join%20Server-5865F2?logo=matrix&logoColor=white)](https://discord.gg/HPyVqAy7)
 
 > Multi-radio offensive security platform with WiFi, BLE, SubGHz (CC1101), and 2.4GHz (NRF24L01+) capabilities.
 
@@ -280,7 +280,7 @@ Features added that **never existed** in original CiferTech firmware:
 This edition features a complete visual overhaul:
 
 - **Custom Color Palette** — Magenta (#FF5EF2) and Cyan (#00CFFF) theme
-- **Skull Menu Icons** — 8 custom 16x16 skull-themed navigation icons
+- **Nova Menu Icons** — 8 custom 16x16 geometric-themed navigation icons
 - **Splash Screen** — Full-screen HaleHound branded startup
 - **Transparent Buttons** — Clean button styling with cyan/magenta borders
 - **Updated Branding** — "v2.5.0 - HaleHound Edition" displayed on device
