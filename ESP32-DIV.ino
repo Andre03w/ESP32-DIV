@@ -27,13 +27,13 @@ bool feature_exit_requested = false;
 
 const int NUM_MENU_ITEMS = 8;
 const char *menu_items[NUM_MENU_ITEMS] = {
-    "WiFi",
+    "Wi-Fi",
     "Bluetooth",
     "2.4GHz",
     "SubGHz",
-    "IR Remote",
+    "IR Tools",
     "Tools",
-    "Setting",
+    "Settings",
     "About"};
 
 const unsigned char *bitmap_icons[NUM_MENU_ITEMS] = {
@@ -53,39 +53,39 @@ bool is_main_menu = false;
 const int NUM_SUBMENU_ITEMS = 7; 
 const char *submenu_items[NUM_SUBMENU_ITEMS] = {
     "Packet Monitor",
-    "Beacon Spammer",
-    "WiFi Deauther",
-    "Deauth Detector",
-    "WiFi Scanner",
-    "Captive Portal",
+    "Beacon Frame Simulator",
+    "Wi-Fi Connection Stability Test",
+    "Wi-Fi Management Frame Monitor",
+    "Wi-Fi Network Scanner",
+    "Captive Portal Simulator",
     "Back to Main Menu"}; 
 
 
 const int bluetooth_NUM_SUBMENU_ITEMS = 6; 
 const char *bluetooth_submenu_items[bluetooth_NUM_SUBMENU_ITEMS] = {
-    "BLE Jammer",
-    "BLE Spoofer",
-    "Sour Apple",
-    "Sniffer",
-    "BLE Scanner",
+    "BLE Channel Activity Analyzer",
+    "BLE Device Emulator",
+    "Apple BLE Compatibility Test",
+    "BLE Packet Monitor",
+    "BLE Device Scanner",
     "Back to Main Menu"};
 
 
 const int nrf_NUM_SUBMENU_ITEMS = 5;
 const char *nrf_submenu_items[nrf_NUM_SUBMENU_ITEMS] = {
-    "Scanner",
+    "Channel Scanner",
     "Spectrum Analyzer",
-    "WLAN Jammer",
-    "Proto Kill",
+    "WLAN Channel Activity Analyzer",
+    "Protocol Stress Testing Tool",
     "Back to Main Menu"};    
 
 
 const int subghz_NUM_SUBMENU_ITEMS = 5; 
 const char *subghz_submenu_items[subghz_NUM_SUBMENU_ITEMS] = {
-    "Replay Attack",
-    "Brute Force",
-    "SubGHz Jammer",
-    "Saved Profile",
+    "Signal Replay Testing Tool",
+    "Sequential Signal Testing",
+    "SubGHz Signal Environment Analyzer",
+    "Saved Profiles",
     "Back to Main Menu"};  
 
 
@@ -114,7 +114,7 @@ const char *ir_submenu_items[ir_NUM_SUBMENU_ITEMS] = {
 const int about_NUM_SUBMENU_ITEMS = 1; 
 const char *about_submenu_items[about_NUM_SUBMENU_ITEMS] = {
     "Back to Main Menu"};
-    
+
 int current_submenu_index = 0;
 bool in_sub_menu = false;
 
@@ -124,36 +124,36 @@ int active_submenu_size = 0;
 
 const unsigned char *wifi_submenu_icons[NUM_SUBMENU_ITEMS] = {
     bitmap_icon_wifi,         // Packet Monitor
-    bitmap_icon_antenna,      // Beacon Spammer
-    bitmap_icon_wifi_jammer,  // WiFi Deauther
-    bitmap_icon_eye2,         // Deauth Detector
-    bitmap_icon_jammer,       // WiFi Scanner
-    bitmap_icon_bash,         // Captive Portal
+    bitmap_icon_antenna,      // Beacon Frame Simulator
+    bitmap_icon_wifi_jammer,  // Wi-Fi Connection Stability Test
+    bitmap_icon_eye2,         // Wi-Fi Management Frame Monitor
+    bitmap_icon_jammer,       // Wi-Fi Network Scanner
+    bitmap_icon_bash,         // Captive Portal Simulator
     bitmap_icon_go_back       
 };
 
 const unsigned char *bluetooth_submenu_icons[bluetooth_NUM_SUBMENU_ITEMS] = {
-    bitmap_icon_ble_jammer,  // BLE Jammer
-    bitmap_icon_spoofer,     // BLE Spoofer
-    bitmap_icon_apple,       // Sour Apple
-    bitmap_icon_analyzer,    // Analyzer
-    bitmap_icon_graph,       // BLE Scanner
+    bitmap_icon_ble_jammer,  // BLE Channel Activity Analyzer
+    bitmap_icon_spoofer,     // BLE Device Emulator
+    bitmap_icon_apple,       // Apple BLE Compatibility Test
+    bitmap_icon_analyzer,    // BLE Packet Monitor
+    bitmap_icon_graph,       // BLE Device Scanner
     bitmap_icon_go_back      
 };
 
 const unsigned char *nrf_submenu_icons[nrf_NUM_SUBMENU_ITEMS] = {
-    bitmap_icon_scanner,      // Scanner
+    bitmap_icon_scanner,      // Channel Scanner
     bitmap_icon_analyzer,     // Spectrum Analyzer
-    bitmap_icon_wifi_jammer,  // WLAN Jammer
-    bitmap_icon_kill,         // Proto Kill
+    bitmap_icon_wifi_jammer,  // WLAN Channel Activity Analyzer
+    bitmap_icon_kill,         // Protocol Stress Testing Tool
     bitmap_icon_go_back
 };
 
 const unsigned char *subghz_submenu_icons[subghz_NUM_SUBMENU_ITEMS] = {
-    bitmap_icon_antenna,   // Replay Attack
-    bitmap_icon_skull,     // Brute Force
-    bitmap_icon_no_signal, // SubGHz Jammer
-    bitmap_icon_list,      // Saved Profile
+    bitmap_icon_antenna,   // Signal Replay Testing Tool
+    bitmap_icon_skull,     // Sequential Signal Testing
+    bitmap_icon_no_signal, // SubGHz Signal Environment Analyzer
+    bitmap_icon_list,      // Saved Profiles
     bitmap_icon_go_back
 };
 
@@ -278,7 +278,7 @@ void displaySubmenu() {
             if (i == active_submenu_size - 1) yPos += 10;
 
             tft.setTextColor((i == active_submenu_size - 1) ? SHREDDY_TEAL : SHREDDY_TEAL, TFT_BLACK);         
-            tft.drawBitmap(10, yPos, active_submenu_icons[i], 16, 16, (i == active_submenu_size - 1) ? SHREDDY_TEAL : SHREDDY_TEAL);            
+            tft.drawBitmap(10, yPos, active_submenu_icons[i], 16, 16, (i == active_submenu_size - 1) ? SHREDDY_TEAL : SHREDDY_TEAL);
             tft.setCursor(30, yPos); 
             if (i < active_submenu_size - 1) { 
                 tft.print("| "); 
@@ -308,7 +308,7 @@ void displaySubmenu() {
         if (current_submenu_index == active_submenu_size - 1) new_yPos += 10;
 
         tft.setTextColor((current_submenu_index == active_submenu_size - 1) ? ORANGE : ORANGE, TFT_BLACK);
-        tft.drawBitmap(10, new_yPos, active_submenu_icons[current_submenu_index], 16, 16, (current_submenu_index == active_submenu_size - 1) ? ORANGE : ORANGE);       
+        tft.drawBitmap(10, new_yPos, active_submenu_icons[current_submenu_index], 16, 16, (current_submenu_index == active_submenu_size - 1) ? ORANGE : ORANGE);
         tft.setCursor(30, new_yPos);
         if (current_submenu_index < active_submenu_size - 1) { 
             tft.print("| "); 
@@ -327,16 +327,17 @@ const int X_OFFSET_RIGHT = X_OFFSET_LEFT + COLUMN_WIDTH;
 const int Y_START = 30;        
 const int Y_SPACING = 75;   
 
+
 void displayMenu() {
 
 const uint16_t icon_colors[NUM_MENU_ITEMS] = {
-  0xFFFF, // WiFi
+  0xFFFF, // Wi-Fi
   0xFFFF, // Bluetooth
   0xFFFF, // 2.4GHz
   0xFFFF, // SubGHz
-  0xFFFF, // IR Remote
+  0xFFFF, // IR Tools
   0xFFFF, // Tools
-  0x8410, // Setting
+  0x8410, // Settings
   0xFFFF  // About
 };
   
@@ -1421,7 +1422,7 @@ void handleNRFSubmenuButtons() {
             }
         }
 
-        // WLAN Jammer (index 2)
+        // WLAN Channel Activity Analyzer (index 2)
         if (current_submenu_index == 2) {
             current_submenu_index = 2;
             in_sub_menu = true;
@@ -1591,7 +1592,7 @@ void handleNRFSubmenuButtons() {
                         delay(200);
                     }
                 } else if (current_submenu_index == 2) {
-                    // Touch: WLAN Jammer
+                    // Touch: WLAN Channel Activity Analyzer
                     current_submenu_index = 2;
                     in_sub_menu = true;
                     feature_active = true;
@@ -2600,11 +2601,11 @@ void handleIRSubmenuButtons() {
             in_sub_menu = true;
             feature_active = true;
             feature_exit_requested = false; 
-            //replayat::ReplayAttackSetup();
+            //replayat::ReplayAnalysisSetup();
             while (current_submenu_index == 0 && !feature_exit_requested) {  
                 current_submenu_index = 0;
                 in_sub_menu = true;
-                //replayat::ReplayAttackLoop();       
+                //replayat::ReplayAnalysisLoop();       
                 if (isButtonPressed(BTN_SELECT)) {
                     in_sub_menu = true;
                     is_main_menu = false; 
@@ -2703,11 +2704,11 @@ void handleIRSubmenuButtons() {
                     in_sub_menu = true;
                     feature_active = true;
                     feature_exit_requested = false; 
-                    //replayat::ReplayAttackSetup();
+                    //replayat::ReplayAnalysisSetup();
                     while (current_submenu_index == 0 && !feature_exit_requested) {  
                         current_submenu_index = 0;
                         in_sub_menu = true;
-                        //replayat::ReplayAttackLoop();       
+                        //replayat::ReplayAnalysisLoop();       
                         if (isButtonPressed(BTN_SELECT)) {
                             in_sub_menu = true;
                             is_main_menu = false; 
@@ -2778,7 +2779,7 @@ void handleAboutPage() {
   tft.setTextSize(1);
   tft.setTextFont(2);
   
-  const char* title = "[About This Project]";
+  const char* title = "Multi-band platform for monitoring radio spectrum based on the ESP32";
   tft.setCursor(10, 90);
   tft.println(title);
   
@@ -2789,16 +2790,10 @@ void handleAboutPage() {
   tft.println("- ESP32-DIV v2.5.0");
   text_y += lineHeight;
   tft.setCursor(text_x, text_y);
-  tft.println("- HaleHound Edition");
+  tft.println("- By: Andrei Y.");
   text_y += lineHeight;
   tft.setCursor(text_x, text_y);
-  tft.println("- By: JMFH");
-  text_y += lineHeight;
-  tft.setCursor(text_x, text_y);
-  tft.println("- Original: CiferTech");
-  text_y += lineHeight;
-  tft.setCursor(text_x, text_y);
-  tft.println("- GitHub: github.com/JesseCHale");
+  tft.println("- 2026");
   text_y += lineHeight;
 
 
