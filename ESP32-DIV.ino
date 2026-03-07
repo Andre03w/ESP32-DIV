@@ -55,7 +55,7 @@ const char *submenu_items[NUM_SUBMENU_ITEMS] = {
     "Packet Monitor",
     "Beacon Frame Simulator",
     "Wi-Fi Connection Stability Test",
-    "Wi-Fi Management Frame Monitor",
+    "Deauthentication Monitor",
     "Wi-Fi Network Scanner",
     "Captive Portal Simulator",
     "Back to Main Menu"}; 
@@ -82,9 +82,9 @@ const char *nrf_submenu_items[nrf_NUM_SUBMENU_ITEMS] = {
 
 const int subghz_NUM_SUBMENU_ITEMS = 5; 
 const char *subghz_submenu_items[subghz_NUM_SUBMENU_ITEMS] = {
-    "Signal Replay Testing Tool",
-    "Sequential Signal Testing",
-    "SubGHz Signal Environment Analyzer",
+    "Sub-GHz Signal Recorder",
+    "Spectrum Activity Test",
+    "Signal Profile Manager",
     "Saved Profiles",
     "Back to Main Menu"};  
 
@@ -126,7 +126,7 @@ const unsigned char *wifi_submenu_icons[NUM_SUBMENU_ITEMS] = {
     bitmap_icon_wifi,         // Packet Monitor
     bitmap_icon_antenna,      // Beacon Frame Simulator
     bitmap_icon_wifi_jammer,  // Wi-Fi Connection Stability Test
-    bitmap_icon_eye2,         // Wi-Fi Management Frame Monitor
+    bitmap_icon_eye2,         // Deauthentication Monitor
     bitmap_icon_jammer,       // Wi-Fi Network Scanner
     bitmap_icon_bash,         // Captive Portal Simulator
     bitmap_icon_go_back       
@@ -150,9 +150,9 @@ const unsigned char *nrf_submenu_icons[nrf_NUM_SUBMENU_ITEMS] = {
 };
 
 const unsigned char *subghz_submenu_icons[subghz_NUM_SUBMENU_ITEMS] = {
-    bitmap_icon_antenna,   // Signal Replay Testing Tool
-    bitmap_icon_skull,     // Sequential Signal Testing
-    bitmap_icon_no_signal, // SubGHz Signal Environment Analyzer
+    bitmap_icon_antenna,   // Sub-GHz Signal Recorder
+    bitmap_icon_skull,     // Spectrum Activity Test
+    bitmap_icon_no_signal, // Signal Profile Manager
     bitmap_icon_list,      // Saved Profiles
     bitmap_icon_go_back
 };
@@ -2163,11 +2163,7 @@ void displayDeviceInfo() {
 
     tft.setCursor(10, y); tft.print("Device: ESP32-DIV");
     y += 25;
-    tft.setCursor(10, y); tft.print("Version: v2.5.0 - HaleHound");
-    y += 25;
-    tft.setCursor(10, y); tft.print("By: HaleHound (JMFH)");
-    y += 25;
-    tft.setCursor(10, y); tft.print("Original: CiferTech");
+    tft.setCursor(10, y); tft.print("Version: v2.5.0");
     y += 25;
     tft.setCursor(10, y); tft.printf("Free Heap: %d", ESP.getFreeHeap());
     y += 25;
