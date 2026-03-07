@@ -243,7 +243,7 @@ STORAGE:
 This edition features a complete visual overhaul:
 
 - Custom Color Palette: Magenta (#FF5EF2) and Cyan (#00CFFF) theme
-- Skull Menu Icons: 8 custom 16x16 skull-themed navigation icons
+- Nova Menu Icons: 8 custom 16x16 geometric-themed navigation icons
 - Splash Screen: Full-screen HaleHound branded startup
 - Transparent Buttons: Clean button styling with cyan/magenta borders
 - Updated Branding: "v2.4 - HaleHound Edition" displayed on device
@@ -438,7 +438,7 @@ Build Statistics:
   shared.h          - Shared definitions
   Touchscreen.cpp   - Touch calibration and handling
   Touchscreen.h     - Touch declarations
-  skull_bg.h        - HaleHound skull background graphic
+  skull_bg.h        - HaleHound rebranded background graphic
   home_bg.h         - HaleHound home screen background
 
 ================================================================================
